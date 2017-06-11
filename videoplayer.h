@@ -1,21 +1,22 @@
-#ifndef Mpeg2_PLAYER_H
-#define Mpeg2_PLAYER_H
+#ifndef Video_PLAYER_H
+#define Video_PLAYER_H
 
 #include <QImage>
 #include <QQuickItem>
 
+
 class Mpeg2Dec;
 class QSGGeometryNode;
 
-class Mpeg2Player : public QQuickItem
+class VideoPlayer : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(bool play READ play WRITE setPlay NOTIFY playChanged)
     Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged)
 
 public:
-    explicit Mpeg2Player(QQuickItem *parent = 0);
-    ~Mpeg2Player();
+    explicit VideoPlayer(QQuickItem *parent = 0);
+    ~VideoPlayer();
 
     void setPlay(const bool &);
     bool play() const { return m_play; }
@@ -46,7 +47,8 @@ private:
     bool m_textureChanged;
 
     QString m_source;
+
     Mpeg2Dec *m_mpeg2Dec;
 };
 
-#endif // Mpeg2_PLAYER_H
+#endif // Video_PLAYER_H

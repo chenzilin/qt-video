@@ -8,14 +8,14 @@
 #include <QQmlApplicationEngine>
 
 
-#include "mpeg2player.h"
+#include "videoplayer.h"
 
 
 int main(int argc, char ** argv)
 {
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<Mpeg2Player>("Mpeg2Player", 1, 0, "Mpeg2Player");
+    qmlRegisterType<VideoPlayer>("VideoPlayer", 1, 0, "VideoPlayer");
 
     QQuickView viewer;
     viewer.setSource(QUrl("qrc:///main.qml"));

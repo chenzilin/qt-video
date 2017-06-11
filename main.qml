@@ -1,18 +1,18 @@
 import QtQuick 2.5
 
-import Mpeg2Player 1.0
+import VideoPlayer 1.0
 
 Rectangle {
     width: 800
     height: 480
     color: "green"
 
-    Mpeg2Player {
+    VideoPlayer {
         x: 10
         y: 10
-        width: 450
-        height: 250
+        width: 720
+        height: 272
         play: true
-        source: "/home/chenzilin/Tmp/mpeg2-player/test-video.raw"
+        source: "/home/chenzilin/Tmp/qt-video/mpeg2-video.raw"
     }
 }

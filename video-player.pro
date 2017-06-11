@@ -1,8 +1,8 @@
 # QT Modules
-QT += qml quick concurrent widgets
+QT += qml quick
 
 # Target
-TARGET = mpeg2_player
+TARGET = video_player
 TEMPLATE = app
 
 CONFIG += c++14
@@ -17,12 +17,12 @@ CONFIG(release, debug|release) {
 # Sources and Headers
 HEADERS += \
     mpeg2dec.h \
-    mpeg2player.h
+    videoplayer.h
 
 SOURCES += \
     main.cpp \
     mpeg2dec.cpp \
-    mpeg2player.cpp
+    videoplayer.cpp
 
 # Qml Files
 OTHER_FILES += main.qml

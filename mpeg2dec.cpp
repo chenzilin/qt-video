@@ -76,7 +76,6 @@ void Mpeg2Dec::run()
             mpeg2_buffer (decoder, buffer, buffer + size);
             break;
         case STATE_SEQUENCE:
-
             fps = 27000000.0 / info->sequence->frame_period; // MPEG2时钟为27MHz
             frame_period_time = 1000.0 / fps;
             qWarning() << "Video Fps: " << fps;
