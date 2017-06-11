@@ -13,6 +13,6 @@ Rectangle {
         width: 450
         height: 250
         play: true
-        source: "/home/chenzilin/Tmp/mpeg2-player/splash.raw"
+        source: "/home/chenzilin/Tmp/mpeg2-player/test-video.raw"
     }
 }

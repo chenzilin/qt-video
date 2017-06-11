@@ -2,11 +2,7 @@
 #define Mpeg2Dec_H
 
 #include <QImage>
-#include <QMutex>
 #include <QThread>
-#include <QWaitCondition>
-
-class QSGGeometryNode;
 
 class Mpeg2Dec : public QThread
 {
@@ -22,14 +18,9 @@ signals:
     void imageChanged(QImage texture);
 
 private:
-    bool m_running;
-    QMutex m_wait_mutex;
-    QWaitCondition m_wait;
-    QSGGeometryNode *m_node;
-
-    QString m_source;
-
     void run();
+    bool m_running;
+    QString m_source;
 };
 
 #endif // Mpeg2Dec_H
