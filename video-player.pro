@@ -25,7 +25,9 @@ SOURCES += \
     videoplayer.cpp
 
 # Qml Files
-OTHER_FILES += main.qml
+OTHER_FILES += \
+    main.qml \
+    main-pc.qml
 
 # Resources
 RESOURCES += qml.qrc

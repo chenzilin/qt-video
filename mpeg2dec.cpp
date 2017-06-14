@@ -1,5 +1,6 @@
 #include <QDebug>
 #include <QSGGeometryNode>
+#include <QCoreApplication>
 #include <QSGSimpleTextureNode>
 
 #include "mpeg2dec.h"
@@ -72,8 +73,8 @@ void Mpeg2Dec::run()
         state = mpeg2_parse (decoder);
         switch (state) {
         case STATE_BUFFER:
-            size = fread (buffer, 1, BUFFER_SIZE, mpgfile);
-            mpeg2_buffer (decoder, buffer, buffer + size);
+            size = fread(buffer, 1, BUFFER_SIZE, mpgfile);
+            mpeg2_buffer(decoder, buffer, buffer + size);
             break;
         case STATE_SEQUENCE:
             fps = 27000000.0 / info->sequence->frame_period; // MPEG2时钟为27MHz
@@ -82,7 +83,7 @@ void Mpeg2Dec::run()
             qWarning() << "Video Width: " << info->sequence->width;
             qWarning() << "Video Height: " << info->sequence->height;
 
-            mpeg2_convert (decoder, mpeg2convert_rgb24, NULL);
+            mpeg2_convert(decoder, mpeg2convert_rgb24, NULL);
             break;
         case STATE_SLICE:
         case STATE_END:
@@ -92,9 +93,9 @@ void Mpeg2Dec::run()
                              info->sequence->width,
                              info->sequence->height,
                              QImage::Format_RGB888));
+                QCoreApplication::processEvents(QEventLoop::AllEvents);
+                qDebug() << "Decoder video Frame: " << ++frame_count;
             }
-
-            qDebug() << "Decoder video Frame: " << ++frame_count;
             break;
         default:
             break;
@@ -102,5 +103,5 @@ void Mpeg2Dec::run()
 
         usleep(frame_period_time * 200);
     } while (size && m_running);
-    mpeg2_close (decoder);
+    mpeg2_close(decoder);
 }

@@ -6,7 +6,7 @@
 #include "videoplayer.h"
 
 VideoPlayer::VideoPlayer(QQuickItem *parent)
-    : QQuickItem(parent), m_play(false), m_boundChanged(true), m_textureChanged(true)
+    : QQuickItem(parent), m_play(false), m_boundChanged(false), m_textureChanged(false)
 {
     setFlag(ItemHasContents, true);
     connect(this, &VideoPlayer::xChanged, this, &VideoPlayer::boundChanged);
@@ -97,6 +97,7 @@ void VideoPlayer::updateMaterial(QSGGeometryNode *node)
 {
     QSGTextureMaterial *material = (QSGTextureMaterial *)node->material();
     material->setTexture(window()->createTextureFromImage(m_texture));
+    node->markDirty(QSGNode::DirtyMaterial);
 }
 
 void VideoPlayer::updateGeometry(QSGGeometryNode *node, const QRectF &bounds)

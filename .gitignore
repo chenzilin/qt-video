@@ -2,3 +2,4 @@
 bin/
 build/
 Makefile
+pkg-config_wrapper.sh

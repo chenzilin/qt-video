@@ -13,6 +13,6 @@ Rectangle {
         width: 720
         height: 272
         play: true
-        source: "/usr/lib/videos/splash.raw"
+        source: "/home/chenzilin/Tmp/qt-video/mpeg2-video.raw"
     }
 }
