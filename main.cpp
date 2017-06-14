@@ -13,12 +13,16 @@
 
 int main(int argc, char ** argv)
 {
+#ifdef Q_PROCESSOR_ARM
+    //设置可触摸
+    setenv("QT_QPA_GENERIC_PLUGINS", "evdevtouch:/dev/input/event0", 1);
+#endif
+
     QGuiApplication app(argc, argv);
 
     qmlRegisterType<VideoPlayer>("VideoPlayer", 1, 0, "VideoPlayer");
 
     QQuickView viewer;
-
 #ifdef Q_PROCESSOR_ARM
     viewer.setSource(QUrl("qrc:///main.qml"));
 #else

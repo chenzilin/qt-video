@@ -96,6 +96,7 @@ QSGNode *VideoPlayer::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 void VideoPlayer::updateMaterial(QSGGeometryNode *node)
 {
     QSGTextureMaterial *material = (QSGTextureMaterial *)node->material();
+    delete material->texture();
     material->setTexture(window()->createTextureFromImage(m_texture));
     node->markDirty(QSGNode::DirtyMaterial);
 }

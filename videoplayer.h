@@ -46,7 +46,7 @@ private:
     QImage m_texture;
     bool m_textureChanged;
 
-    QString m_source;
+    QString m_source = "";
 
     Mpeg2Dec *m_mpeg2Dec;
 };
