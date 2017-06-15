@@ -6,14 +6,8 @@
 #include "mpeg2dec.h"
 
 Mpeg2Dec::Mpeg2Dec(const QString &source, QObject *parent)
-    : QThread(parent), m_running(false), m_source(source)
+    : QThread(parent), m_running(false), m_source(source), m_mpeg2File(0)
 {
-    m_decoder = mpeg2_init();
-    if (m_decoder == NULL) {
-        fprintf (stderr, "Could not allocate a decoder object.\n");
-        exit (1);
-    }
-    m_decoderInfo = mpeg2_info(m_decoder);
 }
 
 Mpeg2Dec::~Mpeg2Dec()
@@ -24,9 +18,16 @@ Mpeg2Dec::~Mpeg2Dec()
 
 void Mpeg2Dec::setSource(const QString &source)
 {
+    if (source == "") return ;
+
     if (m_source != source) {
 
-        if (source != "" && m_mpeg2File != 0) fclose(m_mpeg2File);
+        if (m_running) m_running = false;
+
+        if (m_mpeg2File != 0) {
+            fclose(m_mpeg2File);
+            m_mpeg2File = 0;
+        }
 
         m_source = source;
         m_mpeg2File = fopen(m_source.toStdString().c_str(), "rb");
@@ -53,6 +54,13 @@ void Mpeg2Dec::setRunning(const bool &running)
 void Mpeg2Dec::run()
 {
     size_t length = -1;
+
+    m_decoder = mpeg2_init();
+    if (m_decoder == NULL) {
+        fprintf (stderr, "Could not allocate a decoder object.\n");
+        exit (1);
+    }
+    m_decoderInfo = mpeg2_info(m_decoder);
 
     do {
         m_decoderState = mpeg2_parse(m_decoder);
@@ -91,4 +99,6 @@ void Mpeg2Dec::run()
             break;
         }
     } while (length && m_running);
+
+    m_running = false;
 }
