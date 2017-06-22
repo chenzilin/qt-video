@@ -41,12 +41,10 @@ void Mpeg2Dec::setSource(const QString &source)
 void Mpeg2Dec::setRunning(const bool &running)
 {
     if (m_running != running) {
+        fseek(m_mpeg2File, 0, SEEK_SET);
         m_running = running;
         if (m_running) {
             this->start();
-        }
-        else {
-            fseek(m_mpeg2File, 0, SEEK_SET);
         }
     }
 }
